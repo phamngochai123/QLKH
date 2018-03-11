@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLKHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="customers" Relationship="Self.FK_customer_category" FromRole="category" ToRole="customer" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDay" Type="DateTime" Precision="0" />
+    <Property Name="IdCard" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="FamilyPhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Money" Type="Int32" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="InterestId" Type="Int32" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="category" Relationship="Self.FK_customer_category" FromRole="customer" ToRole="category" />
+    <NavigationProperty Name="interestRate" Relationship="Self.FK_customer_interestRate" FromRole="customer" ToRole="interestRate" />
+    <NavigationProperty Name="friends" Relationship="Self.FK_friend_customer" FromRole="customer" ToRole="friend" />
+    <NavigationProperty Name="historyPaids" Relationship="Self.FK_historyPaid_customer" FromRole="customer" ToRole="historyPaid" />
+  </EntityType>
+  <EntityType Name="friend">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="Relationship" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="customer" Relationship="Self.FK_friend_customer" FromRole="friend" ToRole="customer" />
+  </EntityType>
+  <EntityType Name="historyInterestRate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="Percents" Type="Double" />
+    <Property Name="InterestRateId" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="interestRate" Relationship="Self.FK_historyInterestRate_interestRate" FromRole="historyInterestRate" ToRole="interestRate" />
+  </EntityType>
+  <EntityType Name="historyPaid">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaidDate" Type="DateTime" Precision="3" />
+    <Property Name="Money" Type="Int32" />
+    <Property Name="TypePaid" Type="Boolean" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="customer" Relationship="Self.FK_historyPaid_customer" FromRole="historyPaid" ToRole="customer" />
+  </EntityType>
+  <EntityType Name="interestRate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="customers" Relationship="Self.FK_customer_interestRate" FromRole="interestRate" ToRole="customer" />
+    <NavigationProperty Name="historyInterestRates" Relationship="Self.FK_historyInterestRate_interestRate" FromRole="interestRate" ToRole="historyInterestRate" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="PassWord" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IdCard" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="BirthDay" Type="DateTime" Precision="0" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Sex" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_customer_category">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="customer" Type="Self.customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="customer">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_customer_interestRate">
+    <End Role="interestRate" Type="Self.interestRate" Multiplicity="0..1" />
+    <End Role="customer" Type="Self.customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="interestRate">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="customer">
+        <PropertyRef Name="InterestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_friend_customer">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="friend" Type="Self.friend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="friend">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_historyPaid_customer">
+    <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+    <End Role="historyPaid" Type="Self.historyPaid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="historyPaid">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_historyInterestRate_interestRate">
+    <End Role="interestRate" Type="Self.interestRate" Multiplicity="0..1" />
+    <End Role="historyInterestRate" Type="Self.historyInterestRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="interestRate">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="historyInterestRate">
+        <PropertyRef Name="InterestRateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLKHEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="friends" EntityType="Self.friend" />
+    <EntitySet Name="historyInterestRates" EntityType="Self.historyInterestRate" />
+    <EntitySet Name="historyPaids" EntityType="Self.historyPaid" />
+    <EntitySet Name="interestRates" EntityType="Self.interestRate" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK_customer_category" Association="Self.FK_customer_category">
+      <End Role="category" EntitySet="categories" />
+      <End Role="customer" EntitySet="customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_customer_interestRate" Association="Self.FK_customer_interestRate">
+      <End Role="interestRate" EntitySet="interestRates" />
+      <End Role="customer" EntitySet="customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_friend_customer" Association="Self.FK_friend_customer">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="friend" EntitySet="friends" />
+    </AssociationSet>
+    <AssociationSet Name="FK_historyPaid_customer" Association="Self.FK_historyPaid_customer">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="historyPaid" EntitySet="historyPaids" />
+    </AssociationSet>
+    <AssociationSet Name="FK_historyInterestRate_interestRate" Association="Self.FK_historyInterestRate_interestRate">
+      <End Role="interestRate" EntitySet="interestRates" />
+      <End Role="historyInterestRate" EntitySet="historyInterestRates" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
