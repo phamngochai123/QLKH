@@ -24,7 +24,7 @@ namespace QLKH_v3.UI
         {
             try
             {
-               grcCategory.DataSource = Util.ToDataTable(DAL_QLCategory.Get_List_Category());
+                grcCategory.DataSource = Util.ConvertToDataTable(DAL_QLCategory.Get_List_Category());
             }
             catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace QLKH_v3.UI
 
         private void grvCategory_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            DataRow row = grvCategory.GetFocusedDataRow(e.FocusedRowHandle);
+            DataRow row = grvCategory.GetDataRow(e.FocusedRowHandle);
             if (row != null)
             {
                 //if (flag != "add" && flag != "edit")
