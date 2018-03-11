@@ -172,6 +172,7 @@
       <DependentUpon>QLKH.tt</DependentUpon>
     </Compile>
     <Compile Include="Util\Util.cs" />
+    <Compile Include="Variable\Variable.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -234,9 +235,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Variable\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="QLKH.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

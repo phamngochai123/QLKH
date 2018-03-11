@@ -13,16 +13,16 @@ namespace QLKH_v3.Util
     {
         public void Show_Message_Error(string title, string message)
         {
-            MessageBox.Show(title, message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         public void Show_Message_Notification(string title, string message)
         {
-            MessageBox.Show(title, message, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         public bool Show_Message_YesNo(string title, string message)
         {
             bool check = false;
-            DialogResult dialogResult = MessageBox.Show(title, message, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
                 check = true;

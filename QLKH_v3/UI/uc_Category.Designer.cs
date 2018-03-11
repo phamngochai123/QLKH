@@ -31,6 +31,11 @@
             this.panelBody = new DevExpress.XtraEditors.PanelControl();
             this.grcCategory = new DevExpress.XtraGrid.GridControl();
             this.grvCategory = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.col1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.col2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelheader = new DevExpress.XtraEditors.PanelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.btn_them = new DevExpress.XtraEditors.SimpleButton();
@@ -41,11 +46,6 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txt_name_category = new DevExpress.XtraEditors.TextEdit();
             this.Status = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelBody)).BeginInit();
             this.panelBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grcCategory)).BeginInit();
@@ -95,6 +95,54 @@
             this.grvCategory.OptionsView.ShowGroupPanel = false;
             this.grvCategory.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvCategory_FocusedRowChanged);
             // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Id";
+            this.gridColumn3.FieldName = "id";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.OptionsColumn.ReadOnly = true;
+            // 
+            // col1
+            // 
+            this.col1.Caption = "Tên danh mục";
+            this.col1.FieldName = "Name";
+            this.col1.Name = "col1";
+            this.col1.OptionsColumn.AllowEdit = false;
+            this.col1.OptionsColumn.ReadOnly = true;
+            this.col1.Visible = true;
+            this.col1.VisibleIndex = 1;
+            // 
+            // col2
+            // 
+            this.col2.Caption = "Ghi chú";
+            this.col2.FieldName = "Note";
+            this.col2.Name = "col2";
+            this.col2.OptionsColumn.ReadOnly = true;
+            this.col2.Visible = true;
+            this.col2.VisibleIndex = 0;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Ngày tạo";
+            this.gridColumn1.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.gridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn1.FieldName = "CreatedAt";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.ReadOnly = true;
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 2;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Ngày sửa";
+            this.gridColumn2.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.gridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn2.FieldName = "UpdatedAt";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsColumn.ReadOnly = true;
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 3;
+            // 
             // panelheader
             // 
             this.panelheader.Controls.Add(this.groupControl1);
@@ -131,6 +179,7 @@
             this.btn_them.Size = new System.Drawing.Size(118, 30);
             this.btn_them.TabIndex = 4;
             this.btn_them.Text = "Thêm danh mục";
+            this.btn_them.Click += new System.EventHandler(this.btn_them_Click);
             // 
             // btn_xoa
             // 
@@ -197,54 +246,6 @@
             this.Status.Name = "Status";
             this.Status.Visible = true;
             this.Status.VisibleIndex = 4;
-            // 
-            // col1
-            // 
-            this.col1.Caption = "Tên danh mục";
-            this.col1.FieldName = "Name";
-            this.col1.Name = "col1";
-            this.col1.OptionsColumn.AllowEdit = false;
-            this.col1.OptionsColumn.ReadOnly = true;
-            this.col1.Visible = true;
-            this.col1.VisibleIndex = 1;
-            // 
-            // col2
-            // 
-            this.col2.Caption = "Ghi chú";
-            this.col2.FieldName = "Note";
-            this.col2.Name = "col2";
-            this.col2.OptionsColumn.ReadOnly = true;
-            this.col2.Visible = true;
-            this.col2.VisibleIndex = 0;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Ngày tạo";
-            this.gridColumn1.DisplayFormat.FormatString = "dd-MM-yyyy";
-            this.gridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn1.FieldName = "CreatedAt";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.OptionsColumn.ReadOnly = true;
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 2;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Ngày sửa";
-            this.gridColumn2.DisplayFormat.FormatString = "dd-MM-yyyy";
-            this.gridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn2.FieldName = "UpdatedAt";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsColumn.ReadOnly = true;
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 3;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "Id";
-            this.gridColumn3.FieldName = "id";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.OptionsColumn.ReadOnly = true;
             // 
             // uc_Category
             // 

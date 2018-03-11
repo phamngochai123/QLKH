@@ -41,5 +41,19 @@ namespace QLKH_v3.DAL
             }
             return Category;
         }
+        public bool Add_Category(category ctgr) {
+            bool is_update = false;
+            try
+            {
+                _db.categories.Add(ctgr);
+                _db.SaveChanges();
+                is_update = true;
+            }
+            catch (Exception)
+            {
+                return is_update;
+            }
+            return is_update;
+        }
     }
 }
