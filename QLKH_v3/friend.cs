@@ -24,7 +24,11 @@ namespace QLKH_v3
         public Nullable<int> CustomerId { get; set; }
         public string Note { get; set; }
         public Nullable<bool> Status { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
     
         public virtual customer customer { get; set; }
+        public virtual user user { get; set; }
+        public virtual user user1 { get; set; }
     }
 }

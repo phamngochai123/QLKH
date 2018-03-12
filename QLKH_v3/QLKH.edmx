@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QLKHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QLKHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="id" />
@@ -13,8 +13,10 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
-          <Property Name="Note" Type="text" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="customer">
           <Key>
@@ -34,6 +36,8 @@
           <Property Name="Note" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="bit" />
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="friend">
           <Key>
@@ -47,8 +51,10 @@
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
           <Property Name="CustomerId" Type="int" />
-          <Property Name="Note" Type="text" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="historyInterestRate">
           <Key>
@@ -59,10 +65,12 @@
           <Property Name="EndDate" Type="date" />
           <Property Name="Percents" Type="float" />
           <Property Name="InterestRateId" Type="int" />
-          <Property Name="Note" Type="text" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="bit" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="historyPaid">
           <Key>
@@ -73,10 +81,12 @@
           <Property Name="Money" Type="int" />
           <Property Name="TypePaid" Type="bit" />
           <Property Name="CustomerId" Type="int" />
-          <Property Name="Note" Type="text" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="bit" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="interestRate">
           <Key>
@@ -86,8 +96,10 @@
           <Property Name="Name" Type="nchar" MaxLength="10" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
-          <Property Name="Note" Type="text" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="UpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -112,10 +124,34 @@
           <Property Name="BirthDay" Type="date" />
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="UpdatedAt" Type="datetime" />
-          <Property Name="Note" Type="text" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
           <Property Name="Status" Type="bit" />
           <Property Name="Sex" Type="bit" />
         </EntityType>
+        <Association Name="FK_category_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_category_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_customer_category">
           <End Role="category" Type="Self.category" Multiplicity="0..1" />
           <End Role="customer" Type="Self.customer" Multiplicity="*" />
@@ -140,6 +176,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_customer_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_friend_customer">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="friend" Type="Self.friend" Multiplicity="*" />
@@ -149,6 +209,30 @@
             </Principal>
             <Dependent Role="friend">
               <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friend_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="friend" Type="Self.friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friend">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friend_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="friend" Type="Self.friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friend">
+              <PropertyRef Name="UpdatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -164,6 +248,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_historyInterestRate_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="historyInterestRate" Type="Self.historyInterestRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="historyInterestRate">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_historyInterestRate_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="historyInterestRate" Type="Self.historyInterestRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="historyInterestRate">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_historyPaid_customer">
           <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
           <End Role="historyPaid" Type="Self.historyPaid" Multiplicity="*" />
@@ -176,6 +284,85 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_historyPaid_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="historyPaid" Type="Self.historyPaid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="historyPaid">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_historyPaid_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="historyPaid" Type="Self.historyPaid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="historyPaid">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_interestRate_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="interestRate" Type="Self.interestRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="interestRate">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_interestRate_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="interestRate" Type="Self.interestRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="interestRate">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="QLKHModelStoreContainer">
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
@@ -185,6 +372,14 @@
           <EntitySet Name="interestRate" EntityType="Self.interestRate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_category_user" Association="Self.FK_category_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_category_user1" Association="Self.FK_category_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
           <AssociationSet Name="FK_customer_category" Association="Self.FK_customer_category">
             <End Role="category" EntitySet="category" />
             <End Role="customer" EntitySet="customer" />
@@ -193,24 +388,64 @@
             <End Role="interestRate" EntitySet="interestRate" />
             <End Role="customer" EntitySet="customer" />
           </AssociationSet>
+          <AssociationSet Name="FK_customer_user" Association="Self.FK_customer_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_user1" Association="Self.FK_customer_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
           <AssociationSet Name="FK_friend_customer" Association="Self.FK_friend_customer">
             <End Role="customer" EntitySet="customer" />
+            <End Role="friend" EntitySet="friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friend_user" Association="Self.FK_friend_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="friend" EntitySet="friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friend_user1" Association="Self.FK_friend_user1">
+            <End Role="user" EntitySet="user" />
             <End Role="friend" EntitySet="friend" />
           </AssociationSet>
           <AssociationSet Name="FK_historyInterestRate_interestRate" Association="Self.FK_historyInterestRate_interestRate">
             <End Role="interestRate" EntitySet="interestRate" />
             <End Role="historyInterestRate" EntitySet="historyInterestRate" />
           </AssociationSet>
+          <AssociationSet Name="FK_historyInterestRate_user" Association="Self.FK_historyInterestRate_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="historyInterestRate" EntitySet="historyInterestRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historyInterestRate_user1" Association="Self.FK_historyInterestRate_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="historyInterestRate" EntitySet="historyInterestRate" />
+          </AssociationSet>
           <AssociationSet Name="FK_historyPaid_customer" Association="Self.FK_historyPaid_customer">
             <End Role="customer" EntitySet="customer" />
             <End Role="historyPaid" EntitySet="historyPaid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historyPaid_user" Association="Self.FK_historyPaid_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="historyPaid" EntitySet="historyPaid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historyPaid_user1" Association="Self.FK_historyPaid_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="historyPaid" EntitySet="historyPaid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_interestRate_user" Association="Self.FK_interestRate_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="interestRate" EntitySet="interestRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_interestRate_user1" Association="Self.FK_interestRate_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="interestRate" EntitySet="interestRate" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="QLKHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="QLKHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="id" />
@@ -219,9 +454,13 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="customers" Relationship="Self.FK_customer_category" FromRole="category" ToRole="customer" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <NavigationProperty Name="user" Relationship="Self.FK_category_user" FromRole="category" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="Self.FK_category_user1" FromRole="category" ToRole="user" />
+          <NavigationProperty Name="customer" Relationship="Self.FK_customer_category" FromRole="category" ToRole="customer" />
         </EntityType>
         <EntityType Name="customer">
           <Key>
@@ -241,10 +480,14 @@
           <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
           <NavigationProperty Name="category" Relationship="Self.FK_customer_category" FromRole="customer" ToRole="category" />
           <NavigationProperty Name="interestRate" Relationship="Self.FK_customer_interestRate" FromRole="customer" ToRole="interestRate" />
-          <NavigationProperty Name="friends" Relationship="Self.FK_friend_customer" FromRole="customer" ToRole="friend" />
-          <NavigationProperty Name="historyPaids" Relationship="Self.FK_historyPaid_customer" FromRole="customer" ToRole="historyPaid" />
+          <NavigationProperty Name="user" Relationship="Self.FK_customer_user" FromRole="customer" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="Self.FK_customer_user1" FromRole="customer" ToRole="user" />
+          <NavigationProperty Name="friend" Relationship="Self.FK_friend_customer" FromRole="customer" ToRole="friend" />
+          <NavigationProperty Name="historyPaid" Relationship="Self.FK_historyPaid_customer" FromRole="customer" ToRole="historyPaid" />
         </EntityType>
         <EntityType Name="friend">
           <Key>
@@ -258,9 +501,13 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
           <Property Name="CustomerId" Type="Int32" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
           <NavigationProperty Name="customer" Relationship="Self.FK_friend_customer" FromRole="friend" ToRole="customer" />
+          <NavigationProperty Name="user" Relationship="Self.FK_friend_user" FromRole="friend" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="Self.FK_friend_user1" FromRole="friend" ToRole="user" />
         </EntityType>
         <EntityType Name="historyInterestRate">
           <Key>
@@ -271,11 +518,15 @@
           <Property Name="EndDate" Type="DateTime" Precision="0" />
           <Property Name="Percents" Type="Double" />
           <Property Name="InterestRateId" Type="Int32" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
           <NavigationProperty Name="interestRate" Relationship="Self.FK_historyInterestRate_interestRate" FromRole="historyInterestRate" ToRole="interestRate" />
+          <NavigationProperty Name="user" Relationship="Self.FK_historyInterestRate_user" FromRole="historyInterestRate" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="Self.FK_historyInterestRate_user1" FromRole="historyInterestRate" ToRole="user" />
         </EntityType>
         <EntityType Name="historyPaid">
           <Key>
@@ -286,11 +537,15 @@
           <Property Name="Money" Type="Int32" />
           <Property Name="TypePaid" Type="Boolean" />
           <Property Name="CustomerId" Type="Int32" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
           <NavigationProperty Name="customer" Relationship="Self.FK_historyPaid_customer" FromRole="historyPaid" ToRole="customer" />
+          <NavigationProperty Name="user" Relationship="Self.FK_historyPaid_user" FromRole="historyPaid" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="Self.FK_historyPaid_user1" FromRole="historyPaid" ToRole="user" />
         </EntityType>
         <EntityType Name="interestRate">
           <Key>
@@ -300,12 +555,16 @@
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="customers" Relationship="Self.FK_customer_interestRate" FromRole="interestRate" ToRole="customer" />
-          <NavigationProperty Name="historyInterestRates" Relationship="Self.FK_historyInterestRate_interestRate" FromRole="interestRate" ToRole="historyInterestRate" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <NavigationProperty Name="customer" Relationship="Self.FK_customer_interestRate" FromRole="interestRate" ToRole="customer" />
+          <NavigationProperty Name="historyInterestRate" Relationship="Self.FK_historyInterestRate_interestRate" FromRole="interestRate" ToRole="historyInterestRate" />
+          <NavigationProperty Name="user" Relationship="Self.FK_interestRate_user" FromRole="interestRate" ToRole="user" />
+          <NavigationProperty Name="user1" Relationship="Self.FK_interestRate_user1" FromRole="interestRate" ToRole="user" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -328,10 +587,46 @@
           <Property Name="BirthDay" Type="DateTime" Precision="0" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
-          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="Sex" Type="Boolean" />
+          <NavigationProperty Name="category" Relationship="Self.FK_category_user" FromRole="user" ToRole="category" />
+          <NavigationProperty Name="category1" Relationship="Self.FK_category_user1" FromRole="user" ToRole="category" />
+          <NavigationProperty Name="customer" Relationship="Self.FK_customer_user" FromRole="user" ToRole="customer" />
+          <NavigationProperty Name="customer1" Relationship="Self.FK_customer_user1" FromRole="user" ToRole="customer" />
+          <NavigationProperty Name="friend" Relationship="Self.FK_friend_user" FromRole="user" ToRole="friend" />
+          <NavigationProperty Name="friend1" Relationship="Self.FK_friend_user1" FromRole="user" ToRole="friend" />
+          <NavigationProperty Name="historyInterestRate" Relationship="Self.FK_historyInterestRate_user" FromRole="user" ToRole="historyInterestRate" />
+          <NavigationProperty Name="historyInterestRate1" Relationship="Self.FK_historyInterestRate_user1" FromRole="user" ToRole="historyInterestRate" />
+          <NavigationProperty Name="historyPaid" Relationship="Self.FK_historyPaid_user" FromRole="user" ToRole="historyPaid" />
+          <NavigationProperty Name="historyPaid1" Relationship="Self.FK_historyPaid_user1" FromRole="user" ToRole="historyPaid" />
+          <NavigationProperty Name="interestRate" Relationship="Self.FK_interestRate_user" FromRole="user" ToRole="interestRate" />
+          <NavigationProperty Name="interestRate1" Relationship="Self.FK_interestRate_user1" FromRole="user" ToRole="interestRate" />
         </EntityType>
+        <Association Name="FK_category_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_category_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="category" Type="Self.category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="category">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_customer_category">
           <End Role="category" Type="Self.category" Multiplicity="0..1" />
           <End Role="customer" Type="Self.customer" Multiplicity="*" />
@@ -353,6 +648,30 @@
             </Principal>
             <Dependent Role="customer">
               <PropertyRef Name="InterestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="UpdatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -380,6 +699,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_friend_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="friend" Type="Self.friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friend">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_friend_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="friend" Type="Self.friend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="friend">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_historyInterestRate_interestRate">
           <End Role="interestRate" Type="Self.interestRate" Multiplicity="0..1" />
           <End Role="historyInterestRate" Type="Self.historyInterestRate" Multiplicity="*" />
@@ -392,43 +735,204 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_historyInterestRate_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="historyInterestRate" Type="Self.historyInterestRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="historyInterestRate">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_historyInterestRate_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="historyInterestRate" Type="Self.historyInterestRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="historyInterestRate">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_historyPaid_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="historyPaid" Type="Self.historyPaid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="historyPaid">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_historyPaid_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="historyPaid" Type="Self.historyPaid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="historyPaid">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_interestRate_user">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="interestRate" Type="Self.interestRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="interestRate">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_interestRate_user1">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="interestRate" Type="Self.interestRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="interestRate">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="QLKHEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="categories" EntityType="Self.category" />
-          <EntitySet Name="customers" EntityType="Self.customer" />
-          <EntitySet Name="friends" EntityType="Self.friend" />
-          <EntitySet Name="historyInterestRates" EntityType="Self.historyInterestRate" />
-          <EntitySet Name="historyPaids" EntityType="Self.historyPaid" />
-          <EntitySet Name="interestRates" EntityType="Self.interestRate" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="category" EntityType="Self.category" />
+          <EntitySet Name="customer" EntityType="Self.customer" />
+          <EntitySet Name="friend" EntityType="Self.friend" />
+          <EntitySet Name="historyInterestRate" EntityType="Self.historyInterestRate" />
+          <EntitySet Name="historyPaid" EntityType="Self.historyPaid" />
+          <EntitySet Name="interestRate" EntityType="Self.interestRate" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <AssociationSet Name="FK_category_user" Association="Self.FK_category_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_category_user1" Association="Self.FK_category_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="category" EntitySet="category" />
+          </AssociationSet>
           <AssociationSet Name="FK_customer_category" Association="Self.FK_customer_category">
-            <End Role="category" EntitySet="categories" />
-            <End Role="customer" EntitySet="customers" />
+            <End Role="category" EntitySet="category" />
+            <End Role="customer" EntitySet="customer" />
           </AssociationSet>
           <AssociationSet Name="FK_customer_interestRate" Association="Self.FK_customer_interestRate">
-            <End Role="interestRate" EntitySet="interestRates" />
-            <End Role="customer" EntitySet="customers" />
+            <End Role="interestRate" EntitySet="interestRate" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_user" Association="Self.FK_customer_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_user1" Association="Self.FK_customer_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="customer" EntitySet="customer" />
           </AssociationSet>
           <AssociationSet Name="FK_friend_customer" Association="Self.FK_friend_customer">
-            <End Role="customer" EntitySet="customers" />
-            <End Role="friend" EntitySet="friends" />
+            <End Role="customer" EntitySet="customer" />
+            <End Role="friend" EntitySet="friend" />
           </AssociationSet>
           <AssociationSet Name="FK_historyPaid_customer" Association="Self.FK_historyPaid_customer">
-            <End Role="customer" EntitySet="customers" />
-            <End Role="historyPaid" EntitySet="historyPaids" />
+            <End Role="customer" EntitySet="customer" />
+            <End Role="historyPaid" EntitySet="historyPaid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friend_user" Association="Self.FK_friend_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="friend" EntitySet="friend" />
+          </AssociationSet>
+          <AssociationSet Name="FK_friend_user1" Association="Self.FK_friend_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="friend" EntitySet="friend" />
           </AssociationSet>
           <AssociationSet Name="FK_historyInterestRate_interestRate" Association="Self.FK_historyInterestRate_interestRate">
-            <End Role="interestRate" EntitySet="interestRates" />
-            <End Role="historyInterestRate" EntitySet="historyInterestRates" />
+            <End Role="interestRate" EntitySet="interestRate" />
+            <End Role="historyInterestRate" EntitySet="historyInterestRate" />
           </AssociationSet>
+          <AssociationSet Name="FK_historyInterestRate_user" Association="Self.FK_historyInterestRate_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="historyInterestRate" EntitySet="historyInterestRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historyInterestRate_user1" Association="Self.FK_historyInterestRate_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="historyInterestRate" EntitySet="historyInterestRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historyPaid_user" Association="Self.FK_historyPaid_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="historyPaid" EntitySet="historyPaid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historyPaid_user1" Association="Self.FK_historyPaid_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="historyPaid" EntitySet="historyPaid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_interestRate_user" Association="Self.FK_interestRate_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="interestRate" EntitySet="interestRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_interestRate_user1" Association="Self.FK_interestRate_user1">
+            <End Role="user" EntitySet="user" />
+            <End Role="interestRate" EntitySet="interestRate" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QLKHModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QLKHModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="QLKHModelStoreContainer" CdmEntityContainer="QLKHEntities">
-          <EntitySetMapping Name="categories">
+          <EntitySetMapping Name="category">
             <EntityTypeMapping TypeName="QLKHModel.category">
               <MappingFragment StoreEntitySet="category">
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -437,10 +941,12 @@
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="customers">
+          <EntitySetMapping Name="customer">
             <EntityTypeMapping TypeName="QLKHModel.customer">
               <MappingFragment StoreEntitySet="customer">
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -457,10 +963,12 @@
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="friends">
+          <EntitySetMapping Name="friend">
             <EntityTypeMapping TypeName="QLKHModel.friend">
               <MappingFragment StoreEntitySet="friend">
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -473,10 +981,12 @@
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="historyInterestRates">
+          <EntitySetMapping Name="historyInterestRate">
             <EntityTypeMapping TypeName="QLKHModel.historyInterestRate">
               <MappingFragment StoreEntitySet="historyInterestRate">
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -488,10 +998,12 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="historyPaids">
+          <EntitySetMapping Name="historyPaid">
             <EntityTypeMapping TypeName="QLKHModel.historyPaid">
               <MappingFragment StoreEntitySet="historyPaid">
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -503,10 +1015,12 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="interestRates">
+          <EntitySetMapping Name="interestRate">
             <EntityTypeMapping TypeName="QLKHModel.interestRate">
               <MappingFragment StoreEntitySet="interestRate">
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -515,11 +1029,13 @@
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="QLKHModel.sysdiagram">
+            <EntityTypeMapping TypeName="QLKHModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -529,7 +1045,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="users">
+          <EntitySetMapping Name="user">
             <EntityTypeMapping TypeName="QLKHModel.user">
               <MappingFragment StoreEntitySet="user">
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -547,6 +1063,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="QLKHModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="QLKHModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="QLKHModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="QLKHModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLKHModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="QLKHModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLKHModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QLKHModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QLKHModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -561,7 +1101,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

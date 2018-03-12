@@ -14,10 +14,11 @@ namespace QLKH_v3
     
     public partial class customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public customer()
         {
-            this.friends = new HashSet<friend>();
-            this.historyPaids = new HashSet<historyPaid>();
+            this.friend = new HashSet<friend>();
+            this.historyPaid = new HashSet<historyPaid>();
         }
     
         public int id { get; set; }
@@ -34,10 +35,16 @@ namespace QLKH_v3
         public string Note { get; set; }
         public Nullable<bool> Status { get; set; }
         public string Address { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+        public Nullable<int> UpdatedBy { get; set; }
     
         public virtual category category { get; set; }
         public virtual interestRate interestRate { get; set; }
-        public virtual ICollection<friend> friends { get; set; }
-        public virtual ICollection<historyPaid> historyPaids { get; set; }
+        public virtual user user { get; set; }
+        public virtual user user1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<friend> friend { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<historyPaid> historyPaid { get; set; }
     }
 }

@@ -4,20 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9e613ecee0dd4eaca4882b3362c621da" Name="Diagram1">
-        <EntityTypeShape EntityType="QLKHModel.category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLKHModel.customer" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLKHModel.friend" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLKHModel.historyInterestRate" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLKHModel.historyPaid" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLKHModel.interestRate" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLKHModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLKHModel.user" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="6402822bdd2e4020acf8ea3b016f4673" Name="Diagram1">
+        <EntityTypeShape EntityType="QLKHModel.category" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKHModel.customer" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKHModel.friend" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKHModel.historyInterestRate" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKHModel.historyPaid" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKHModel.interestRate" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKHModel.sysdiagrams" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLKHModel.user" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="QLKHModel.FK_category_user" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_category_user1" ManuallyRouted="false" />
         <AssociationConnector Association="QLKHModel.FK_customer_category" ManuallyRouted="false" />
         <AssociationConnector Association="QLKHModel.FK_customer_interestRate" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_customer_user" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_customer_user1" ManuallyRouted="false" />
         <AssociationConnector Association="QLKHModel.FK_friend_customer" ManuallyRouted="false" />
         <AssociationConnector Association="QLKHModel.FK_historyPaid_customer" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_friend_user" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_friend_user1" ManuallyRouted="false" />
         <AssociationConnector Association="QLKHModel.FK_historyInterestRate_interestRate" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_historyInterestRate_user" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_historyInterestRate_user1" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_historyPaid_user" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_historyPaid_user1" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_interestRate_user" ManuallyRouted="false" />
+        <AssociationConnector Association="QLKHModel.FK_interestRate_user1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
