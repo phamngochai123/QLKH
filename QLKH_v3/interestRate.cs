@@ -27,8 +27,8 @@ namespace QLKH_v3
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public string Note { get; set; }
         public Nullable<bool> Status { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<int> UpdatedBy { get; set; }
+        public int CreatedBy { get; set; }
+        public int UpdatedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<customer> customer { get; set; }

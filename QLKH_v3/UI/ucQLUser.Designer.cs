@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.panelheader = new DevExpress.XtraEditors.PanelControl();
+            this.txt_ghi_chu = new DevExpress.XtraEditors.MemoEdit();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.txt_name_category = new DevExpress.XtraEditors.TextEdit();
+            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btn_them = new DevExpress.XtraEditors.SimpleButton();
+            this.btn_xoa = new DevExpress.XtraEditors.SimpleButton();
+            this.btn_sua = new DevExpress.XtraEditors.SimpleButton();
             this.panelBody = new DevExpress.XtraEditors.PanelControl();
             this.grcUser = new DevExpress.XtraGrid.GridControl();
             this.grvUser = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -39,6 +47,11 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelheader)).BeginInit();
+            this.panelheader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_ghi_chu.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_name_category.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
+            this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelBody)).BeginInit();
             this.panelBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grcUser)).BeginInit();
@@ -47,19 +60,104 @@
             // 
             // panelheader
             // 
+            this.panelheader.Controls.Add(this.txt_ghi_chu);
+            this.panelheader.Controls.Add(this.labelControl2);
+            this.panelheader.Controls.Add(this.labelControl1);
+            this.panelheader.Controls.Add(this.txt_name_category);
+            this.panelheader.Controls.Add(this.groupControl1);
             this.panelheader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelheader.Location = new System.Drawing.Point(0, 0);
             this.panelheader.Name = "panelheader";
-            this.panelheader.Size = new System.Drawing.Size(685, 130);
+            this.panelheader.Size = new System.Drawing.Size(869, 301);
             this.panelheader.TabIndex = 0;
+            // 
+            // txt_ghi_chu
+            // 
+            this.txt_ghi_chu.Location = new System.Drawing.Point(110, 34);
+            this.txt_ghi_chu.Name = "txt_ghi_chu";
+            this.txt_ghi_chu.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_ghi_chu.Properties.Appearance.Options.UseFont = true;
+            this.txt_ghi_chu.Size = new System.Drawing.Size(464, 96);
+            this.txt_ghi_chu.TabIndex = 12;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Location = new System.Drawing.Point(5, 35);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(60, 16);
+            this.labelControl2.TabIndex = 11;
+            this.labelControl2.Text = "Mật khẩu";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.Location = new System.Drawing.Point(5, 5);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(87, 16);
+            this.labelControl1.TabIndex = 10;
+            this.labelControl1.Text = "Tên tài khoản";
+            // 
+            // txt_name_category
+            // 
+            this.txt_name_category.Location = new System.Drawing.Point(110, 2);
+            this.txt_name_category.Name = "txt_name_category";
+            this.txt_name_category.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_name_category.Properties.Appearance.Options.UseFont = true;
+            this.txt_name_category.Size = new System.Drawing.Size(464, 22);
+            this.txt_name_category.TabIndex = 9;
+            // 
+            // groupControl1
+            // 
+            this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupControl1.AppearanceCaption.Options.UseFont = true;
+            this.groupControl1.Controls.Add(this.btn_them);
+            this.groupControl1.Controls.Add(this.btn_xoa);
+            this.groupControl1.Controls.Add(this.btn_sua);
+            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupControl1.Location = new System.Drawing.Point(2, 216);
+            this.groupControl1.Name = "groupControl1";
+            this.groupControl1.Size = new System.Drawing.Size(865, 83);
+            this.groupControl1.TabIndex = 8;
+            this.groupControl1.Text = "Chức năng";
+            // 
+            // btn_them
+            // 
+            this.btn_them.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_them.Appearance.Options.UseFont = true;
+            this.btn_them.Location = new System.Drawing.Point(12, 32);
+            this.btn_them.Name = "btn_them";
+            this.btn_them.Size = new System.Drawing.Size(118, 30);
+            this.btn_them.TabIndex = 4;
+            this.btn_them.Text = "Thêm user";
+            // 
+            // btn_xoa
+            // 
+            this.btn_xoa.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_xoa.Appearance.Options.UseFont = true;
+            this.btn_xoa.Location = new System.Drawing.Point(311, 32);
+            this.btn_xoa.Name = "btn_xoa";
+            this.btn_xoa.Size = new System.Drawing.Size(118, 30);
+            this.btn_xoa.TabIndex = 6;
+            this.btn_xoa.Text = "Xóa user";
+            // 
+            // btn_sua
+            // 
+            this.btn_sua.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_sua.Appearance.Options.UseFont = true;
+            this.btn_sua.Location = new System.Drawing.Point(161, 32);
+            this.btn_sua.Name = "btn_sua";
+            this.btn_sua.Size = new System.Drawing.Size(118, 30);
+            this.btn_sua.TabIndex = 5;
+            this.btn_sua.Text = "Sửa user";
             // 
             // panelBody
             // 
             this.panelBody.Controls.Add(this.grcUser);
             this.panelBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBody.Location = new System.Drawing.Point(0, 130);
+            this.panelBody.Location = new System.Drawing.Point(0, 301);
             this.panelBody.Name = "panelBody";
-            this.panelBody.Size = new System.Drawing.Size(685, 195);
+            this.panelBody.Size = new System.Drawing.Size(869, 162);
             this.panelBody.TabIndex = 1;
             // 
             // grcUser
@@ -68,7 +166,7 @@
             this.grcUser.Location = new System.Drawing.Point(2, 2);
             this.grcUser.MainView = this.grvUser;
             this.grcUser.Name = "grcUser";
-            this.grcUser.Size = new System.Drawing.Size(681, 191);
+            this.grcUser.Size = new System.Drawing.Size(865, 158);
             this.grcUser.TabIndex = 0;
             this.grcUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvUser});
@@ -88,7 +186,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "Tên tài khoản";
-            this.gridColumn1.FieldName = "Username";
+            this.gridColumn1.FieldName = "UserName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -96,7 +194,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "Mật khẩu";
-            this.gridColumn2.FieldName = "Password";
+            this.gridColumn2.FieldName = "PassWord";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -140,9 +238,15 @@
             this.Controls.Add(this.panelBody);
             this.Controls.Add(this.panelheader);
             this.Name = "ucQLUser";
-            this.Size = new System.Drawing.Size(685, 325);
+            this.Size = new System.Drawing.Size(869, 463);
             this.Load += new System.EventHandler(this.ucQLUser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelheader)).EndInit();
+            this.panelheader.ResumeLayout(false);
+            this.panelheader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_ghi_chu.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_name_category.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
+            this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelBody)).EndInit();
             this.panelBody.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grcUser)).EndInit();
@@ -163,5 +267,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraEditors.GroupControl groupControl1;
+        private DevExpress.XtraEditors.SimpleButton btn_them;
+        private DevExpress.XtraEditors.SimpleButton btn_xoa;
+        private DevExpress.XtraEditors.SimpleButton btn_sua;
+        private DevExpress.XtraEditors.MemoEdit txt_ghi_chu;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.TextEdit txt_name_category;
     }
 }

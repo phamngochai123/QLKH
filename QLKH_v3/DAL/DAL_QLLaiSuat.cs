@@ -18,8 +18,8 @@ namespace QLKH_v3.DAL
             List<InterestRate> lst_InterestRate = new List<InterestRate>();
             try
             {
-                lst_InterestRate = (from data in _db.interestRates 
-                                    join data_history in _db.historyInterestRates
+                lst_InterestRate = (from data in _db.interestRate 
+                                    join data_history in _db.historyInterestRate
                                     on data.id equals data_history.InterestRateId
                                     where (data.Status == true && data_history.Status ==true) 
                                     select new InterestRate {
@@ -52,8 +52,8 @@ namespace QLKH_v3.DAL
             InterestRate InterestRate = new InterestRate();
             try
             {
-                InterestRate = (from data in _db.interestRates 
-                                    join data_history in _db.historyInterestRates
+                InterestRate = (from data in _db.interestRate 
+                                    join data_history in _db.historyInterestRate
                                     on data.id equals data_history.InterestRateId
                                 where (data.Status == true && data_history.Status == true && data.id == id_interest) 
                                     select new InterestRate {

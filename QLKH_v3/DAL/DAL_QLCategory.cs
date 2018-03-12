@@ -16,7 +16,11 @@ namespace QLKH_v3.DAL
             List<category> lst_Category = new List<category>();
             try
             {
-                lst_Category = (from data in _db.categories
+                lst_Category = (from data in _db.category
+                                join data_user in _db.user
+                                on data.CreatedBy equals data_user.id 
+                                join data_user2 in _db.user 
+                                on data.UpdatedBy equals data_user2.id
                                 where (data.Status == true)
                                 select data).AsEnumerable().ToList();
             }
@@ -32,7 +36,7 @@ namespace QLKH_v3.DAL
             category Category = new category();
             try
             {
-                Category = (from data in _db.categories
+                Category = (from data in _db.category
                             where (data.Status == true && data.id == id_category)
                             select data).FirstOrDefault();
             }
@@ -71,7 +75,7 @@ namespace QLKH_v3.DAL
                 }
                 else
                 {
-                    _db.categories.Add(ctgr);                                           // add data
+                    _db.category.Add(ctgr);                                           // add data
                 }
                 _db.SaveChanges();
                 check = true;

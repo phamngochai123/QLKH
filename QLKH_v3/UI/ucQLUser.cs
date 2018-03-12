@@ -21,7 +21,7 @@ namespace QLKH_v3.UI
 
         private void ucQLUser_Load(object sender, EventArgs e)
         {
-            grcUser.DataSource = Dal_User.Get_Data_User();
+            grcUser.DataSource = Dal_User.Get_List_User();
         }
 
     }

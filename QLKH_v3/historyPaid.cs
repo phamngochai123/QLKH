@@ -23,8 +23,8 @@ namespace QLKH_v3
         public Nullable<bool> Status { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<int> UpdatedBy { get; set; }
+        public int CreatedBy { get; set; }
+        public int UpdatedBy { get; set; }
     
         public virtual customer customer { get; set; }
         public virtual user user { get; set; }

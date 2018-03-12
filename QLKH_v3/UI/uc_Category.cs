@@ -87,6 +87,8 @@ namespace QLKH_v3.UI
                     ctgr.CreatedAt = DateTime.Now;
                     ctgr.UpdatedAt = DateTime.Now;
                     ctgr.Status = true;
+                    ctgr.CreatedBy = 1;
+                    ctgr.UpdatedBy = 1;
 
                     bool check = DAL_QLCategory.Add_and_Edit_Category(ctgr, Variable.action_status.is_add);
                     if (check == true)

@@ -35,8 +35,8 @@ namespace QLKH_v3
         public string Note { get; set; }
         public Nullable<bool> Status { get; set; }
         public string Address { get; set; }
-        public Nullable<int> CreatedBy { get; set; }
-        public Nullable<int> UpdatedBy { get; set; }
+        public int CreatedBy { get; set; }
+        public int UpdatedBy { get; set; }
     
         public virtual category category { get; set; }
         public virtual interestRate interestRate { get; set; }
