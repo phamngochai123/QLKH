@@ -110,24 +110,26 @@
             this.col1.OptionsColumn.AllowEdit = false;
             this.col1.OptionsColumn.ReadOnly = true;
             this.col1.Visible = true;
-            this.col1.VisibleIndex = 1;
+            this.col1.VisibleIndex = 0;
             // 
             // col2
             // 
             this.col2.Caption = "Ghi chú";
             this.col2.FieldName = "Note";
             this.col2.Name = "col2";
+            this.col2.OptionsColumn.AllowEdit = false;
             this.col2.OptionsColumn.ReadOnly = true;
             this.col2.Visible = true;
-            this.col2.VisibleIndex = 0;
+            this.col2.VisibleIndex = 1;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "Ngày tạo";
-            this.gridColumn1.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.gridColumn1.DisplayFormat.FormatString = "dd-MM-yyyy HH:mm:ss";
             this.gridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn1.FieldName = "CreatedAt";
             this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.OptionsColumn.ReadOnly = true;
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 2;
@@ -135,10 +137,11 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "Ngày sửa";
-            this.gridColumn2.DisplayFormat.FormatString = "dd-MM-yyyy";
+            this.gridColumn2.DisplayFormat.FormatString = "dd-MM-yyyy HH:mm:ss";
             this.gridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn2.FieldName = "UpdatedAt";
             this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsColumn.AllowEdit = false;
             this.gridColumn2.OptionsColumn.ReadOnly = true;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 3;
@@ -190,6 +193,7 @@
             this.btn_xoa.Size = new System.Drawing.Size(118, 30);
             this.btn_xoa.TabIndex = 6;
             this.btn_xoa.Text = "Xóa danh mục";
+            this.btn_xoa.Click += new System.EventHandler(this.btn_xoa_Click);
             // 
             // btn_sua
             // 
@@ -200,6 +204,7 @@
             this.btn_sua.Size = new System.Drawing.Size(118, 30);
             this.btn_sua.TabIndex = 5;
             this.btn_sua.Text = "Sửa danh mục";
+            this.btn_sua.Click += new System.EventHandler(this.btn_sua_Click);
             // 
             // txt_ghi_chu
             // 

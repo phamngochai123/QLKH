@@ -16,6 +16,8 @@ namespace QLKH_v3.UI
         Util.Util Util = new Util.Util();
         Message.Message Message = new Message.Message();
         Variable.Variable Variable = new Variable.Variable();
+
+        int _ID_CATEGORY;
         public uc_Category()
         {
             InitializeComponent();
@@ -34,8 +36,9 @@ namespace QLKH_v3.UI
             }
             return check;
         }
-        private void Load_Data(){
-             try
+        private void Load_Data()
+        {
+            try
             {
                 grcCategory.DataSource = Util.ConvertToDataTable(DAL_QLCategory.Get_List_Category());
             }
@@ -47,7 +50,7 @@ namespace QLKH_v3.UI
         }
         private void uc_Category_Load(object sender, EventArgs e)
         {
-           Load_Data();
+            Load_Data();
         }
 
         private void grvCategory_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -57,8 +60,8 @@ namespace QLKH_v3.UI
             {
                 //if (flag != "add" && flag != "edit")
                 //{
-                int id_category = Util.Cnv_Int(row["id"].ToString().Trim());
-                Fill_Data_Category(id_category);
+                _ID_CATEGORY = Util.Cnv_Int(row["id"].ToString().Trim());
+                Fill_Data_Category(_ID_CATEGORY);
 
                 //}
             }
@@ -80,19 +83,77 @@ namespace QLKH_v3.UI
                 if (CheckValidate() == true)
                 {
                     ctgr.Name = txt_name_category.Text.Trim();
-                    ctgr.Note = txt_name_category.Text.Trim();
+                    ctgr.Note = txt_ghi_chu.Text.Trim();
                     ctgr.CreatedAt = DateTime.Now;
                     ctgr.UpdatedAt = DateTime.Now;
                     ctgr.Status = true;
 
-                    bool check = DAL_QLCategory.Add_Category(ctgr);
+                    bool check = DAL_QLCategory.Add_and_Edit_Category(ctgr, Variable.action_status.is_add);
                     if (check == true)
                     {
                         Util.Show_Message_Notification(Message.msg_notification, Message.msg_success_add_data);
                         Load_Data();
                     }
-                    else {
+                    else
+                    {
                         Util.Show_Message_Error(Message.msg_error, Message.msg_error_add_data);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.Show_Message_Error(Message.msg_error, ex.Message.ToString());
+            }
+        }
+
+        private void btn_sua_Click(object sender, EventArgs e)
+        {
+            category ctgr = new category();
+            try
+            {
+                if (CheckValidate() == true)
+                {
+                    ctgr.Name = txt_name_category.Text.Trim();
+                    ctgr.Note = txt_ghi_chu.Text.Trim();
+                    ctgr.UpdatedAt = DateTime.Now;
+                    ctgr.id = _ID_CATEGORY;
+                    bool check = DAL_QLCategory.Add_and_Edit_Category(ctgr, Variable.action_status.is_update);
+                    if (check == true)
+                    {
+                        Util.Show_Message_Notification(Message.msg_notification, Message.msg_success_edit_data);
+                        Load_Data();
+                    }
+                    else
+                    {
+                        Util.Show_Message_Error(Message.msg_error, Message.msg_error_edit_data);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.Show_Message_Error(Message.msg_error, ex.Message.ToString());
+            }
+        }
+
+        private void btn_xoa_Click(object sender, EventArgs e)
+        {
+            category ctgr = new category();
+            try
+            {
+                if (CheckValidate() == true)
+                {
+                    ctgr.UpdatedAt = DateTime.Now;
+                    ctgr.Status = false;
+                    ctgr.id = _ID_CATEGORY;
+                    bool check = DAL_QLCategory.Add_and_Edit_Category(ctgr, Variable.action_status.is_delete);
+                    if (check == true)
+                    {
+                        Util.Show_Message_Notification(Message.msg_notification, Message.msg_success_edit_data);
+                        Load_Data();
+                    }
+                    else
+                    {
+                        Util.Show_Message_Error(Message.msg_error, Message.msg_error_edit_data);
                     }
                 }
             }

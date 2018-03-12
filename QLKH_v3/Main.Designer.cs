@@ -267,7 +267,6 @@
             this.tasksItem = new DevExpress.XtraNavBar.NavBarItem();
             this.navbarImageCollectionLarge = new DevExpress.Utils.ImageCollection(this.components);
             this.ribbonControl = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
             this.iExit = new DevExpress.XtraBars.BarButtonItem();
             this.siStatus = new DevExpress.XtraBars.BarStaticItem();
             this.siInfo = new DevExpress.XtraBars.BarStaticItem();
@@ -324,9 +323,9 @@
             this.panelMain = new DevExpress.XtraEditors.PanelControl();
             this.ribbonGalleryBarItem3 = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.ribbonGalleryBarItem4 = new DevExpress.XtraBars.RibbonGalleryBarItem();
+            this.appMenu = new DevExpress.XtraBars.Ribbon.ApplicationMenu(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollectionLarge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpreadsheetFontSizeEdit1)).BeginInit();
@@ -356,6 +355,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown23)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown24)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelMain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // mailGroup
@@ -457,13 +457,6 @@
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2007;
             this.ribbonControl.Size = new System.Drawing.Size(1100, 143);
             this.ribbonControl.SelectedPageChanged += new System.EventHandler(this.ribbonControl_SelectedPageChanged);
-            // 
-            // appMenu
-            // 
-            this.appMenu.ItemLinks.Add(this.iExit);
-            this.appMenu.Name = "appMenu";
-            this.appMenu.Ribbon = this.ribbonControl;
-            this.appMenu.ShowRightPane = true;
             // 
             // iExit
             // 
@@ -2340,6 +2333,13 @@
             this.ribbonGalleryBarItem4.Id = 60;
             this.ribbonGalleryBarItem4.Name = "ribbonGalleryBarItem4";
             // 
+            // appMenu
+            // 
+            this.appMenu.ItemLinks.Add(this.iExit);
+            this.appMenu.Name = "appMenu";
+            this.appMenu.Ribbon = this.ribbonControl;
+            this.appMenu.ShowRightPane = true;
+            // 
             // Main
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
@@ -2354,7 +2354,6 @@
             this.Load += new System.EventHandler(this.Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.navbarImageCollectionLarge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.appMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpreadsheetFontSizeEdit1)).EndInit();
@@ -2384,6 +2383,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown23)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarGalleryDropDown24)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelMain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appMenu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2398,7 +2398,6 @@
         private DevExpress.XtraBars.RibbonGalleryBarItem rgbiSkins;
         private DevExpress.XtraBars.Ribbon.RibbonPage tabQuanTri;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup skinsRibbonPageGroup;
-        private DevExpress.XtraBars.Ribbon.ApplicationMenu appMenu;
         private DevExpress.XtraNavBar.NavBarGroup mailGroup;
         private DevExpress.XtraNavBar.NavBarGroup organizerGroup;
         private DevExpress.XtraNavBar.NavBarItem inboxItem;
@@ -2458,6 +2457,7 @@
         private DevExpress.XtraBars.RibbonGalleryBarItem ribbonGalleryBarItem3;
         private DevExpress.XtraBars.RibbonGalleryBarItem ribbonGalleryBarItem4;
         private DevExpress.XtraBars.SkinRibbonGalleryBarItem skinRibbonGalleryBarItem1;
+        private DevExpress.XtraBars.Ribbon.ApplicationMenu appMenu;
 
     }
 }
