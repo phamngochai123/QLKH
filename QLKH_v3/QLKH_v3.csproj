@@ -98,6 +98,7 @@
       <DependentUpon>QLKH.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DAL_QLCategory.cs" />
+    <Compile Include="DAL\DAL_QLCustomer.cs" />
     <Compile Include="DAL\DAL_QLLaiSuat.cs" />
     <Compile Include="DAL\DAL_QLUser.cs" />
     <Compile Include="friend.cs">

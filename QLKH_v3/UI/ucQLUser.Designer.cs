@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panelheader = new DevExpress.XtraEditors.PanelControl();
-            this.txt_ghi_chu = new DevExpress.XtraEditors.MemoEdit();
+            this.txt_password = new DevExpress.XtraEditors.TextEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.txt_name_category = new DevExpress.XtraEditors.TextEdit();
+            this.txt_username = new DevExpress.XtraEditors.TextEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.btn_them = new DevExpress.XtraEditors.SimpleButton();
             this.btn_xoa = new DevExpress.XtraEditors.SimpleButton();
@@ -48,8 +48,8 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelheader)).BeginInit();
             this.panelheader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_ghi_chu.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_name_category.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_password.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_username.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelBody)).BeginInit();
@@ -60,10 +60,10 @@
             // 
             // panelheader
             // 
-            this.panelheader.Controls.Add(this.txt_ghi_chu);
+            this.panelheader.Controls.Add(this.txt_password);
             this.panelheader.Controls.Add(this.labelControl2);
             this.panelheader.Controls.Add(this.labelControl1);
-            this.panelheader.Controls.Add(this.txt_name_category);
+            this.panelheader.Controls.Add(this.txt_username);
             this.panelheader.Controls.Add(this.groupControl1);
             this.panelheader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelheader.Location = new System.Drawing.Point(0, 0);
@@ -71,14 +71,14 @@
             this.panelheader.Size = new System.Drawing.Size(869, 301);
             this.panelheader.TabIndex = 0;
             // 
-            // txt_ghi_chu
+            // txt_password
             // 
-            this.txt_ghi_chu.Location = new System.Drawing.Point(110, 34);
-            this.txt_ghi_chu.Name = "txt_ghi_chu";
-            this.txt_ghi_chu.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_ghi_chu.Properties.Appearance.Options.UseFont = true;
-            this.txt_ghi_chu.Size = new System.Drawing.Size(464, 96);
-            this.txt_ghi_chu.TabIndex = 12;
+            this.txt_password.Location = new System.Drawing.Point(110, 32);
+            this.txt_password.Name = "txt_password";
+            this.txt_password.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_password.Properties.Appearance.Options.UseFont = true;
+            this.txt_password.Size = new System.Drawing.Size(171, 22);
+            this.txt_password.TabIndex = 12;
             // 
             // labelControl2
             // 
@@ -98,14 +98,14 @@
             this.labelControl1.TabIndex = 10;
             this.labelControl1.Text = "Tên tài khoản";
             // 
-            // txt_name_category
+            // txt_username
             // 
-            this.txt_name_category.Location = new System.Drawing.Point(110, 2);
-            this.txt_name_category.Name = "txt_name_category";
-            this.txt_name_category.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_name_category.Properties.Appearance.Options.UseFont = true;
-            this.txt_name_category.Size = new System.Drawing.Size(464, 22);
-            this.txt_name_category.TabIndex = 9;
+            this.txt_username.Location = new System.Drawing.Point(110, 2);
+            this.txt_username.Name = "txt_username";
+            this.txt_username.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_username.Properties.Appearance.Options.UseFont = true;
+            this.txt_username.Size = new System.Drawing.Size(171, 22);
+            this.txt_username.TabIndex = 9;
             // 
             // groupControl1
             // 
@@ -129,7 +129,7 @@
             this.btn_them.Name = "btn_them";
             this.btn_them.Size = new System.Drawing.Size(118, 30);
             this.btn_them.TabIndex = 4;
-            this.btn_them.Text = "Thêm user";
+            this.btn_them.Text = "Thêm tài khoản";
             // 
             // btn_xoa
             // 
@@ -139,7 +139,7 @@
             this.btn_xoa.Name = "btn_xoa";
             this.btn_xoa.Size = new System.Drawing.Size(118, 30);
             this.btn_xoa.TabIndex = 6;
-            this.btn_xoa.Text = "Xóa user";
+            this.btn_xoa.Text = "Xóa tài khoản";
             // 
             // btn_sua
             // 
@@ -149,7 +149,7 @@
             this.btn_sua.Name = "btn_sua";
             this.btn_sua.Size = new System.Drawing.Size(118, 30);
             this.btn_sua.TabIndex = 5;
-            this.btn_sua.Text = "Sửa user";
+            this.btn_sua.Text = "Sửa tài khoản";
             // 
             // panelBody
             // 
@@ -182,6 +182,9 @@
             this.gridColumn6});
             this.grvUser.GridControl = this.grcUser;
             this.grvUser.Name = "grvUser";
+            this.grvUser.OptionsFind.AlwaysVisible = true;
+            this.grvUser.OptionsFind.FindNullPrompt = "Tìm kiếm";
+            this.grvUser.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvUser_FocusedRowChanged);
             // 
             // gridColumn1
             // 
@@ -243,8 +246,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelheader)).EndInit();
             this.panelheader.ResumeLayout(false);
             this.panelheader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_ghi_chu.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txt_name_category.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_password.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_username.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelBody)).EndInit();
@@ -271,9 +274,9 @@
         private DevExpress.XtraEditors.SimpleButton btn_them;
         private DevExpress.XtraEditors.SimpleButton btn_xoa;
         private DevExpress.XtraEditors.SimpleButton btn_sua;
-        private DevExpress.XtraEditors.MemoEdit txt_ghi_chu;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit txt_name_category;
+        private DevExpress.XtraEditors.TextEdit txt_username;
+        private DevExpress.XtraEditors.TextEdit txt_password;
     }
 }
