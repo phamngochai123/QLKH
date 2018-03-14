@@ -44,6 +44,57 @@ namespace QLKH_v3.DAL
             }
             return Customer;
         }
+
+        public List<friend> Get_Friend_By_IdCustomer(int id_Customer) //get friend by id customer
+        {
+            List<friend> lst_friend_of_customer = new List<friend>();
+            try
+            {
+                lst_friend_of_customer = (from data in _db.friend
+                          where (data.Status == true && data.CustomerId == id_Customer)
+                            select data).AsEnumerable().ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return lst_friend_of_customer;
+        }
+
+        public List<historyPaid> Get_HistoryPaidInterest_By_IdCustomer(int id_Customer) //get history paid interest by id customer
+        {
+            List<historyPaid> lst_history_of_customer = new List<historyPaid>();
+            try
+            {
+                lst_history_of_customer = (from data in _db.historyPaid
+                          where (data.Status == true && data.CustomerId == id_Customer && data.TypePaid == true)
+                          select data).AsEnumerable().ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return lst_history_of_customer;
+        }
+
+        public List<historyPaid> Get_HistoryPaidMoney_By_IdCustomer(int id_Customer) //get history paid interest by id customer
+        {
+            List<historyPaid> lst_history_of_customer = new List<historyPaid>();
+            try
+            {
+                lst_history_of_customer = (from data in _db.historyPaid
+                                           where (data.Status == true && data.CustomerId == id_Customer && data.TypePaid == false)
+                                           select data).AsEnumerable().ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return lst_history_of_customer;
+        }
         /// <summary>
         ///  function insert and update and delete User
         /// </summary>

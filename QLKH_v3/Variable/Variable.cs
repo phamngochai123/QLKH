@@ -10,6 +10,8 @@ namespace QLKH_v3.Variable
     {
         public string format_date_time = "yyyy-MM-dd HH:mm:ss";
         public Action_Status action_status = new Action_Status();
+        public bool tra_lai_xuat = true;
+        public bool tra_goc = false;
     }
     class Action_Status{
        public int is_update=1;
